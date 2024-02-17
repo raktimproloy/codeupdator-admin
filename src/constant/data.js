@@ -8,6 +8,67 @@ export const menuItems = [
     title: "Dashboard",
     icon: "heroicons-outline:home",
     link: "dashboard",
+    child: [
+      {
+        childtitle: "Analytics Dashboard",
+        childlink: "dashboard/analytics",
+        childicon: "heroicons:presentation-chart-line",
+      },
+      {
+        childtitle: "Project  Dashboard",
+        childlink: "dashboard/project",
+        childicon: "heroicons:briefcase",
+      },
+      {
+        childtitle: "User Dashboard",
+        childlink: "dashboard/user",
+        childicon: "ri:customer-service-2-fill",
+      },
+    ],
+  },
+  {
+    title: "User Management",
+    icon: "heroicons-outline:home",
+    link: "/user",
+    child: [
+      {
+        childtitle: "Add User",
+        childlink: "user/add",
+        childicon: "heroicons:presentation-chart-line",
+      },
+      {
+        childtitle: "User Details",
+        childlink: "user/details",
+        childicon: "heroicons:shopping-cart",
+      },
+    ],
+  },
+  {
+    title: "Post Management",
+    icon: "heroicons-outline:home",
+    link: "post",
+    child: [
+      {
+        childtitle: "Add Post",
+        childlink: "post/add",
+        childicon: "heroicons:shopping-cart",
+      },
+      {
+        childtitle: "Post Details",
+        childlink: "post/details",
+        childicon: "heroicons:shopping-cart",
+      },
+    ],
+  },
+  {
+    title: "Problem Management",
+    icon: "heroicons-outline:home",
+    link: "/problem/details",
+  },
+  {
+    title: "Top Rated",
+    icon: "heroicons-outline:home",
+    link: "/top-rated/details",
   },
 ];
 

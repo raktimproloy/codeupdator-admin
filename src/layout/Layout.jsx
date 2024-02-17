@@ -61,7 +61,7 @@ const Layout = () => {
           onClick={() => setMobileMenu(false)}
         ></div>
       )}
-      <Settings />
+      {/* <Settings /> */}
       <div
         className={`content-wrapper transition-all duration-150 ${
           width > 1280 ? switchHeaderClass() : ""
@@ -107,10 +107,10 @@ const Layout = () => {
           </div>
         </div>
       </div>
-      {width < breakpoints.md && <MobileFooter />}
+      {/* {width < breakpoints.md && <MobileFooter />}
       {width > breakpoints.md && (
         <Footer className={width > breakpoints.xl ? switchHeaderClass() : ""} />
-      )}
+      )} */}
     </>
   );
 };

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Card from "@/components/ui/Card";
 
-const Dashboard = () => {
+const EditPost = () => {
   return (
     <div>
-      <Card title="Starter Kit">Your Dashboard</Card>
+      <Card title="Starter Kit">Edit Post</Card>
     </div>
   );
 };
 
-export default Dashboard;
+export default EditPost;

@@ -32,17 +32,17 @@ const SidebarLogo = ({ menuHover }) => {
       <Link to="/dashboard">
         <div className="flex items-center space-x-4">
           <div className="logo-icon">
-            {!isDark && !isSemiDark ? (
+            {/* {!isDark && !isSemiDark ? (
               <img src={MobileLogo} alt="" />
             ) : (
               <img src={MobileLogoWhite} alt="" />
-            )}
+            )} */}
           </div>
 
           {(!collapsed || menuHover) && (
             <div>
               <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                DashCode
+                CodesStackFlow
               </h1>
             </div>
           )}

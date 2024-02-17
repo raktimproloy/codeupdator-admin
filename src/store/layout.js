@@ -117,6 +117,43 @@ export const layoutSlice = createSlice({
   },
 });
 
+
+
+
+
+// My Redux 
+
+// Profile Data Slice
+export const profileSlice = createSlice({
+  name: "profile",
+  initialState: {},
+  reducers: {
+    addProfile: (state, action) => {
+      return {...action.payload}; // Concatenate the new users with the existing ones
+    },
+    updateProfile(state, action) {
+      state.splice(action.payload, 1)
+    },
+    clearProfile: (state) => {
+      return {}; // Clear all data by returning an empty object
+    },
+  },
+});
+
+export const {addProfile, updateProfile, clearProfile} = profileSlice.actions
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const {
   handleDarkMode,
   handleSidebarCollapsed,

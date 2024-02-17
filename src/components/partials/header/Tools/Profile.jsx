@@ -44,27 +44,27 @@ const Profile = () => {
         console.log("profile");
       },
     },
-    {
-      label: "Chat",
-      icon: "heroicons-outline:chat",
-      action: () => {
-        console.log("chat");
-      },
-    },
-    {
-      label: "Email",
-      icon: "heroicons-outline:mail",
-      action: () => {
-        console.log("email");
-      },
-    },
-    {
-      label: "Todo",
-      icon: "heroicons-outline:clipboard-check",
-      action: () => {
-        console.log("todo");
-      },
-    },
+    // {
+    //   label: "Chat",
+    //   icon: "heroicons-outline:chat",
+    //   action: () => {
+    //     console.log("chat");
+    //   },
+    // },
+    // {
+    //   label: "Email",
+    //   icon: "heroicons-outline:mail",
+    //   action: () => {
+    //     console.log("email");
+    //   },
+    // },
+    // {
+    //   label: "Todo",
+    //   icon: "heroicons-outline:clipboard-check",
+    //   action: () => {
+    //     console.log("todo");
+    //   },
+    // },
     {
       label: "Settings",
       icon: "heroicons-outline:cog",
@@ -72,20 +72,20 @@ const Profile = () => {
         console.log("settings");
       },
     },
-    {
-      label: "Price",
-      icon: "heroicons-outline:credit-card",
-      action: () => {
-        console.log("price");
-      },
-    },
-    {
-      label: "Faq",
-      icon: "heroicons-outline:information-circle",
-      action: () => {
-        console.log("faq");
-      },
-    },
+    // {
+    //   label: "Price",
+    //   icon: "heroicons-outline:credit-card",
+    //   action: () => {
+    //     console.log("price");
+    //   },
+    // },
+    // {
+    //   label: "Faq",
+    //   icon: "heroicons-outline:information-circle",
+    //   action: () => {
+    //     console.log("faq");
+    //   },
+    // },
     {
       label: "Logout",
       icon: "heroicons-outline:login",
