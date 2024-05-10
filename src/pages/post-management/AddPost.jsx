@@ -15,6 +15,7 @@ import { ToastPopup } from "@/lib/ToastPopup";
 import { Tab } from "@headlessui/react";
 
 import TinyMCE from "./TinyMCE";
+import { useNavigate } from "react-router-dom";
 
 // dummy data 
 const packages = [
@@ -40,10 +41,6 @@ const buttons = [
   {
     title: "Info",
     icon: "heroicons-outline:home",
-  },
-  {
-    title: "Details",
-    icon: "heroicons-outline:user",
   }
 ];
 
@@ -52,6 +49,7 @@ const AddPost = () => {
   const [value, setValue] = useState("<p>TinyMCE Editor text</p>")
   const [showLoading, setShowLoading] = useState(false)
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate()
 
   // Cookies
   const [cookie, removeCookie] = useCookies()
@@ -66,7 +64,6 @@ const AddPost = () => {
 
   // Add new Post
  const handleAddPost = () => {
-  console.log(files)
   if(files.length > 0){
     const formData = new FormData();
     formData.append("image", files[0]);
@@ -76,8 +73,8 @@ const AddPost = () => {
         const imageUrl = res.data.pathname + res.data.filename
 
         axios.post(`${BASE_API}update-post/post`, {
-          package_name: packages[0].value,
-          version: version[0].value,
+          package_name: updatePostData.package_name,
+          version: updatePostData.version,
           details: value,
           image: imageUrl
         }, {
@@ -86,6 +83,7 @@ const AddPost = () => {
         .then((res) => {
             setShowLoading(false)
             ToastPopup("success", "New Blog Added!")
+            navigate("/post/details")
         })
         .catch((err) => {
           setShowLoading(false)
@@ -121,9 +119,6 @@ const AddPost = () => {
     })
   }
 
-  useEffect(() => {
-    console.log(files)
-  }, [files])
 
   return (
     <div>
@@ -197,8 +192,7 @@ const AddPost = () => {
               </div>
             </div>
             <DropZone files={files} setFiles={setFiles} />
-          </Tab.Panel>
-          <Tab.Panel>
+
             <div className="my-5">
               <TinyMCE text={text} setText={setText} value={value} setValue={setValue} />
             </div>

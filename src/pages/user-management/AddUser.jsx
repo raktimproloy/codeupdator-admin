@@ -6,9 +6,11 @@ import Button from "@/components/ui/Button";
 import { BASE_API } from "@/utils/BaseApi";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
   const [showLoading, setShowLoading] = useState(false)
+  const navigate = useNavigate()
   const [newUserData, setNewUserData] = useState({
     first_name: "",
     last_name: "",
@@ -25,6 +27,7 @@ const AddUser = () => {
         axios.post(`${BASE_API}admin-user/signup`, newUserData)
         .then(res => {
           setShowLoading(false)
+          navigate("/user/details")
           ToastPopup("success", "New User Added Successful!")
         })
         .catch(err => {

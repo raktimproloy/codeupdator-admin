@@ -112,7 +112,7 @@ function App() {
                 <PostDetails />
               </Suspense>
             } />
-            <Route path="post/edit" element={
+            <Route path="post/edit/:id" element={
               <Suspense fallback={<Loading />}>
                 <EditPost />
               </Suspense>

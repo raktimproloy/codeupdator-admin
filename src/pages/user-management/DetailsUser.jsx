@@ -5,6 +5,8 @@ import axios from "axios";
 import Icon from "@/components/ui/Icon";
 import Tooltip from "@/components/ui/Tooltip";
 import { useCookies } from "react-cookie";
+import Button from "@/components/ui/Button";
+import Modal from "@/components/ui/Modal";
 
 const columns = [
   {
@@ -31,11 +33,15 @@ const columns = [
 
 const DetailsUser = () => {
   const [user, setUser] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [userId, setUserId] = useState("")
   const [cookie, setCookie, removeCookie] = useCookies()
   const headers = {
     'Authorization': `Bearer ${cookie._token}`
     }
-  useEffect(() => {
+
+
+  const fetchUser = () => {
     axios.get(`${BASE_API}admin-user/get`, {
       headers: headers
     })
@@ -49,11 +55,56 @@ const DetailsUser = () => {
       //   removeCookie("_token")
       // }
     })
+  }
+  useEffect(() => {
+    fetchUser()
   }, [])
+
+  const handleDeleteUser = () => {
+    axios.delete(`${BASE_API}admin-user/delete/${userId}`, {
+      headers: headers
+    })
+    .then(res => {
+      fetchUser()
+      setShowModal(false)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
 
   return (
     <div>
+      <Modal
+          title="Warning"
+          label="Warning "
+          labelClass="btn-outline-warning"
+          themeClass="bg-warning-500"
+          activeModal={showModal}
+          onClose={() => {
+            setShowModal(false)
+          }}
+          footerContent={
+            <Button
+              text="Accept"
+              className="btn-warning "
+              onClick={() => {
+                handleDeleteUser()
+              }}
+            />
+          }
+        >
+          <h4 className="font-medium text-lg mb-3 text-slate-900">
+            Lorem ipsum dolor sit.
+          </h4>
+          <div className="text-base text-slate-600 dark:text-slate-300">
+            Oat cake ice cream candy chocolate cake chocolate cake cotton
+            candy dragée apple pie. Brownie carrot cake candy canes bonbon
+            fruitcake topping halvah. Cake sweet roll cake cheesecake cookie
+            chocolate cake liquorice.
+          </div>
+      </Modal>
       <Card title="Hover Table" noborder>
         <div className="overflow-x-auto -mx-6">
           <div className="inline-block min-w-full align-middle">
@@ -74,7 +125,7 @@ const DetailsUser = () => {
                       key={i}
                       className="hover:bg-slate-200 dark:hover:bg-slate-700"
                     >
-                      <td className="table-td">{row._id}</td>
+                      <td className="table-td">{row.id}</td>
                       <td className="table-td">{row.first_name} {row.last_name}</td>
                       <td className="table-td ">{row.email}</td>
                       <td className="table-td ">{row.role}</td>
@@ -96,8 +147,12 @@ const DetailsUser = () => {
                           arrow
                           animation="shift-away"
                           theme="danger"
+                          
                         >
-                          <button className="action-btn" type="button">
+                          <button className="action-btn" type="button" onClick={()=> {
+                            setUserId(row.id)
+                            setShowModal(true)
+                            }}>
                             <Icon icon="heroicons:trash" />
                           </button>
                         </Tooltip>

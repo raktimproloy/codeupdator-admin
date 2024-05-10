@@ -60,6 +60,7 @@ const LoginForm = () => {
           label="email"
           type="email"
           register={register}
+          defaultValue="avilashlasker01@gmail.com"
           error={errors.email}
           className="h-[48px]"
         />
@@ -67,6 +68,7 @@ const LoginForm = () => {
           name="password"
           label="passwrod"
           type="password"
+          defaultValue="12341234"
           register={register}
           error={errors.password}
           className="h-[48px]"

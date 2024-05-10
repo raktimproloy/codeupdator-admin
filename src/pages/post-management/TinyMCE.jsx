@@ -12,7 +12,7 @@ function TinyMCE({text, setText, value, setValue}) {
         onInit={(evt, editor) => {
         setText(editor.getContent({format: "text"}))
         }}
-        
+        value={value}
         init={{
             height: 500,
             menubar: false,
