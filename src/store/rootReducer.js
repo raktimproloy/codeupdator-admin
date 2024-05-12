@@ -1,6 +1,7 @@
-import layout from "./layout";
+import layout, { profileSlice } from "./layout";
+import { combineReducers } from "@reduxjs/toolkit";
 
-const rootReducer = {
-  layout
-};
-export default rootReducer;
+export default combineReducers({
+  layout,
+  profile: profileSlice.reducer,
+});

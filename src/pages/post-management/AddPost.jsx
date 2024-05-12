@@ -16,6 +16,8 @@ import { Tab } from "@headlessui/react";
 
 import TinyMCE from "./TinyMCE";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { currentDate } from "../../utils/currentDate";
 
 // dummy data 
 const packages = [
@@ -50,6 +52,7 @@ const AddPost = () => {
   const [showLoading, setShowLoading] = useState(false)
   const [files, setFiles] = useState([]);
   const navigate = useNavigate()
+  const profileData = useSelector((state) => state.profile)
 
   // Cookies
   const [cookie, removeCookie] = useCookies()
@@ -76,7 +79,9 @@ const AddPost = () => {
           package_name: updatePostData.package_name,
           version: updatePostData.version,
           details: value,
-          image: imageUrl
+          image: imageUrl,
+          author:profileData.userId,
+          date: currentDate()
         }, {
           headers: headers
         })

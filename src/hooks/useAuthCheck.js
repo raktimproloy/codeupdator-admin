@@ -5,12 +5,13 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 // import { getProfile } from "../utils/getProfile";
 import { useSelector } from "react-redux";
+import { addProfile } from "../store/layout";
 
 const useAuthCheck = () => {
   // Initialize with null to indicate that authentication status is pending
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const dispatch = useDispatch()
-  // const sessionData = useSelector((state) => state.session)
+  const profileData = useSelector((state) => state.profile)
 
   // Cookie hook
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -22,18 +23,22 @@ const useAuthCheck = () => {
     } else {
       const decoded = jwtDecode(token);
       const newSessionData = {
-        userId: decoded.userId,
-        username: decoded.username,
+        userId: decoded.id,
+        first_name: decoded.first_name,
+        last_name: decoded.last_name,
         email: decoded.email,
-        permissionId: decoded.permissionId,
+        // permissionId: decoded.permissionId,
       }
-      // dispatch(addSession(newSessionData));
 
       if (decoded.exp < Date.now() / 1000) {
         setIsAuthenticated(false);
         removeCookie("_token")
+        dispatch(addProfile({}));
       } else {
         setIsAuthenticated(true);
+        if(Object.keys(profileData).length === 0){
+          dispatch(addProfile(newSessionData));
+        }
         // You can also set the token here if needed
         // getProfile(dispatch, cookies, removeCookie, sessionData);
       }
