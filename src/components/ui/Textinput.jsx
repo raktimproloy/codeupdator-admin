@@ -66,6 +66,7 @@ const Textinput = ({
             disabled={disabled}
             id={id}
             onChange={onChange}
+            value={value}
           />
         )}
         {!name && !isMask && (
@@ -78,6 +79,7 @@ const Textinput = ({
             defaultValue={defaultValue}
             onChange={onChange}
             id={id}
+            value={value}
           />
         )}
         {name && isMask && (

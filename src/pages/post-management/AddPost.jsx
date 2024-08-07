@@ -1,14 +1,12 @@
 import React, { useEffect, useState, Fragment } from "react";
 import Card from "@/components/ui/Card";
-import InputGroup from "@/components/ui/InputGroup";
-import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
 import { BASE_API } from "@/utils/BaseApi";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
 import Select from "react-select";
 import DropZone from "./DropZone";
-import Textarea from "@/components/ui/Textarea";
+import Switch from "@/components/ui/Switch"
 import { useCookies } from "react-cookie";
 import { ToastPopup } from "@/lib/ToastPopup";
 
@@ -52,6 +50,7 @@ const AddPost = () => {
   const [showLoading, setShowLoading] = useState(false)
   const [files, setFiles] = useState([]);
   const navigate = useNavigate()
+  const [status, setStatus] = useState("publish")
   const profileData = useSelector((state) => state.profile)
 
   // Cookies
@@ -76,9 +75,11 @@ const AddPost = () => {
         const imageUrl = res.data.pathname + res.data.filename
 
         axios.post(`${BASE_API}update-post/post`, {
+          title: updatePostData.title,
           package_name: updatePostData.package_name,
           version: updatePostData.version,
           details: value,
+          status: status,
           image: imageUrl,
           author:profileData.userId,
           date: currentDate()
@@ -86,9 +87,23 @@ const AddPost = () => {
           headers: headers
         })
         .then((res) => {
+          const id = res.data.id
+          axios.put(`${BASE_API}post-category/update`, {
+            title: updatePostData.title,
+            package_name: updatePostData.package_name,
+            version: updatePostData.version,
+            posts_id: id
+          }, {
+            headers: headers
+          })
+          .then((res) => {
             setShowLoading(false)
             ToastPopup("success", "New Blog Added!")
             navigate("/post/details")
+          })
+          .catch((err) => {
+            console.log(err)
+          })
         })
         .catch((err) => {
           setShowLoading(false)
@@ -115,7 +130,7 @@ const AddPost = () => {
 //  Change select Options
   function handlePackageChange(e) {
     setUpdatePostData({
-        ...updatePostData, package_name:e.value
+        ...updatePostData, package_name:e.value, title: e.label
     })
   }
   function handleVersionChange(e) {
@@ -197,7 +212,14 @@ const AddPost = () => {
               </div>
             </div>
             <DropZone files={files} setFiles={setFiles} />
-
+            <div className="pt-4">
+              <Switch
+                label="Post Active Status"
+                activeClass="bg-danger-500"
+                value={status === "draft" ? false : true}
+                onChange={() => setStatus(status === "draft" ? "publish" : "draft")}
+              />
+            </div>
             <div className="my-5">
               <TinyMCE text={text} setText={setText} value={value} setValue={setValue} />
             </div>

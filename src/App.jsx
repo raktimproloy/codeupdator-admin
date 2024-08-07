@@ -32,6 +32,10 @@ const ProblemDetails = lazy(() => import("./pages/problem-management/index"));
 // Top Rated Management Import
 const TopRatedDetails = lazy(() => import("./pages/top-rated/index"));
 
+// Setting Import
+const Navbar = lazy(() => import("./pages/setting/Navbar"))
+const Package = lazy(() => import("./pages/setting/Package"))
+
 
 
 function App() {
@@ -98,6 +102,18 @@ function App() {
             <Route path="user/details" element={
               <Suspense fallback={<Loading />}>
                 <UserDetails />
+              </Suspense>
+            } />
+
+            {/* Setting */}
+            <Route path="setting/navbar" element={
+              <Suspense fallback={<Loading />}>
+                <Navbar />
+              </Suspense>
+            } />
+            <Route path="setting/package" element={
+              <Suspense fallback={<Loading />}>
+                <Package />
               </Suspense>
             } />
 

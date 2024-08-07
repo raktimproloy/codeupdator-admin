@@ -9,6 +9,7 @@ import { DatabaseDate } from "../../lib/DatabaseDate";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { useNavigate } from "react-router-dom";
+import Pagination from "@/components/ui/Pagination";
 
 const columns = [
   {
@@ -40,12 +41,23 @@ const DetailsPost = () => {
   const [showModal, setShowModal] = useState(false)
   const [postId, setPostId] = useState("")
   const [cookie, setCookie, removeCookie] = useCookies()
+
+  const [totalPages, setTotalPages] = useState(4)
+  const [currentPage, setCurrentPage] = useState(1)
+  const text = "Hello"
+
+
+  const handlePageChange = (updatePage) => {
+    setCurrentPage(updatePage)
+  }
+
+
   const headers = {
     'Authorization': `Bearer ${cookie._token}`
     }
 
     const fetchPost = () => {
-      axios.get(`${BASE_API}update-post/get`, {
+      axios.get(`${BASE_API}update-post/1`, {
         headers: headers
       })
       .then(res => {
@@ -162,6 +174,21 @@ const DetailsPost = () => {
                 </tbody>
               </table>
             </div>
+            {/* {
+                // totalCount > 10 ?
+                <Pagination
+                currentPage={page}
+                totalCount={totalCount}
+                pageSize={limit}
+                onPageChange={page => {
+                    setPage(page)
+                    window.scrollTo({top: 400, left: 0, behavior: 'smooth'});
+                }}
+            />
+            // : ""
+            } */}
+
+          <Pagination currentPage={currentPage} handlePageChange={handlePageChange} totalPages={totalPages} text={text} />
           </div>
         </div>
       </Card>

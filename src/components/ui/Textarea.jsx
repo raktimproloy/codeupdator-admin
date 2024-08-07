@@ -54,7 +54,7 @@ const Textarea = ({
             cols={cols}
             rows={row}
             onChange={onChange}
-          ></textarea>
+          >{dvalue}</textarea>
         )}
         {!name && (
           <textarea
@@ -68,7 +68,7 @@ const Textarea = ({
             cols={cols}
             rows={row}
             onChange={onChange}
-          ></textarea>
+          >{dvalue}</textarea>
         )}
 
         {/* icon */}

@@ -44,6 +44,23 @@ export const menuItems = [
     ],
   },
   {
+    title: "Setting",
+    icon: "heroicons-outline:home",
+    link: "/setting",
+    child: [
+      {
+        childtitle: "Navbar",
+        childlink: "setting/navbar",
+        childicon: "heroicons:presentation-chart-line",
+      },
+      {
+        childtitle: "Package",
+        childlink: "setting/package",
+        childicon: "heroicons:presentation-chart-line",
+      },
+    ],
+  },
+  {
     title: "Post Management",
     icon: "heroicons-outline:home",
     link: "post",

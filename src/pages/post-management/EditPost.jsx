@@ -11,7 +11,7 @@ import DropZone from "./DropZone";
 import Textarea from "@/components/ui/Textarea";
 import { useCookies } from "react-cookie";
 import { ToastPopup } from "@/lib/ToastPopup";
-
+import Switch from "@/components/ui/Switch"
 import { Tab } from "@headlessui/react";
 
 import TinyMCE from "./TinyMCE";
@@ -51,6 +51,7 @@ const EditPost = () => {
   const [showLoading, setShowLoading] = useState(false)
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState("")
+  const [status, setStatus] = useState("draft")
   const navigate = useNavigate()
 
   // Cookies
@@ -72,6 +73,8 @@ const EditPost = () => {
     .then(res => {
       setValue(res.data.details)
       setImage(res.data.image)
+      console.log(res.data.status)
+      setStatus(res.data.status)
       setUpdatePostData({
         package_name: res.data.package_name,
         version: res.data.version
@@ -105,8 +108,10 @@ const EditPost = () => {
           package: updatePostData.package_name,
           version: updatePostData.version,
           details: value,
+          status: status,
           image: imageUrl,
         }
+        console.log(updatedData)
         axios.put(`${BASE_API}update-post/update/${id}`, updatedData, {
           headers: headers
         })
@@ -136,6 +141,7 @@ const EditPost = () => {
       package: updatePostData.package_name,
       version: updatePostData.version,
       details: value,
+      status: status,
       image: image,
     }
     axios.put(`${BASE_API}update-post/update/${id}`, updatedData, {
@@ -249,7 +255,14 @@ const EditPost = () => {
               <img src={`https://upload.codesstackflow.com/${image}`} alt="" />
             </div>
             <DropZone files={files} setFiles={setFiles} />
-
+            <div className="pt-4">
+              <Switch
+                label="Post Active Status"
+                activeClass="bg-danger-500"
+                value={status === "draft" ? false : true}
+                onChange={() => setStatus(status === "draft" ? "publish" : "draft")}
+              />
+            </div>
             <div className="my-5">
               <TinyMCE text={text} setText={setText} value={value} setValue={setValue} />
             </div>
